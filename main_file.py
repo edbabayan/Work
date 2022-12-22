@@ -60,17 +60,19 @@ print(f"MLP: {precision_metric_val[0]}")
 print(f"RFC: {precision_metric_val[1]}")
 print(f"AdaBoost: {precision_metric_val[2]}")
 
+alg_names = [model.__class__.__name__ for model in alg_models]
+
 fig, axs = plt.subplots(2, 2, figsize=(12, 8), dpi=200)
-axs[0, 0].plot(range(len(alg_models)), recall_metric_val, '-gD', markevery=0.4, label='line with markers')
+axs[0, 0].plot(alg_names, recall_metric_val, '-gD', markevery=0.4, label='line with markers')
 axs[0, 0].set_title('Recall for validation')
 axs[0, 0].set_ylabel('Recall for validation')
-axs[0, 1].plot(range(len(alg_models)), precision_metric_val, '-gD', markevery=0.4, label='line with markers')
+axs[0, 1].plot(alg_names, precision_metric_val, '-gD', markevery=0.4, label='line with markers')
 axs[0, 1].set_title('Precision for validation')
 axs[0, 1].set_ylabel('Precision for validation')
-axs[1, 0].plot(range(len(alg_models)), recall_metric_test, '-bD', markevery=0.4, label='line with markers')
+axs[1, 0].plot(alg_names, recall_metric_test, '-bD', markevery=0.4, label='line with markers')
 axs[1, 0].set_title('Recall for test')
 axs[1, 0].set_ylabel("Recall for test")
-axs[1, 1].plot(range(len(alg_models)), precision_metric_test, '-bD', markevery=0.4, label='line with markers')
+axs[1, 1].plot(alg_names, precision_metric_test, '-bD', markevery=0.4, label='line with markers')
 axs[1, 1].set_title('Precision for test')
 axs[1, 1].set_ylabel('Precision for test')
 
