@@ -1,6 +1,5 @@
 from sklearn.metrics import precision_score
 
-
 def precision_func(model, x_train, y_train, x_test, y_test):
     # Fit model training
     model.fit(x_train, y_train)
