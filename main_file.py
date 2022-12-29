@@ -6,10 +6,10 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
 from precision_counter import precision_func
 from recall_counter import recall_func
-from data_remaker import featue_engineering
+from data_remaker import feature_engineering
 
 df = pd.read_csv('Cross sale k-drivers_v2_1.csv')
-df = featue_engineering(df)
+df = feature_engineering(df)
 
 X = df.drop('категория', axis=1)
 X = pd.get_dummies(data=X, columns=['first_prod', 'gender', 'flg_currency'], drop_first=True)
@@ -25,7 +25,7 @@ X_val = scaler.transform(X_val)
 X_test = scaler.transform(X_test)
 
 model_mlp = MLPClassifier(activation='relu', alpha=0.0001, hidden_layer_sizes=(10, 30, 10),
-                          learning_rate='constant', solver='adam')
+                          learning_rate='constant', solver='adam', max_iter=1000)
 model_rfc = RandomForestClassifier(n_estimators=128, max_features=3)
 model_ada = AdaBoostClassifier(n_estimators=59)
 alg_models = [model_mlp, model_rfc, model_ada]

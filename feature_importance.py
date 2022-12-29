@@ -1,14 +1,13 @@
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
-from data_remaker import featue_engineering
+from data_remaker import feature_engineering
 from precision_counter import precision_func
 from recall_counter import recall_func
 
 df = pd.read_csv('Cross sale k-drivers_v2_1.csv')
-df = featue_engineering(df)
+df = feature_engineering(df)
 
 X = df.drop('категория', axis=1)
 X = pd.get_dummies(data=X, columns=['first_prod', 'gender', 'flg_currency'], drop_first=True)

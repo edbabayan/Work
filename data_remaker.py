@@ -1,9 +1,7 @@
-from datetime import datetime
 import pandas as pd
 import numpy as np
-from pandas.api.types import is_object_dtype
 
-def featue_engineering (data):
+def feature_engineering(data):
     data.dropna(inplace=True)
     data.drop('CLIENT_ID', axis=1, inplace=True)
     for i in data.columns:
