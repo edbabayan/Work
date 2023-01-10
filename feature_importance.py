@@ -58,4 +58,3 @@ print(recall_func(model_rfc, X_train, y_train, X_test, y_test))
 print(precision_func(model_rfc, X_train, y_train, X_test, y_test))
 print(recall_func(model_rfc, X_train, y_train, X_val, y_val))
 print(precision_func(model_rfc, X_train, y_train, X_val, y_val))
-

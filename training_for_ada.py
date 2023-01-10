@@ -1,13 +1,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from data_remaker import featue_engineering
+from data_remaker import feature_engineering
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import accuracy_score
 
 
 df = pd.read_csv('Cross sale k-drivers_v2_1.csv')
-df = featue_engineering(df)
+df = feature_engineering(df)
 
 X = pd.get_dummies(df.drop('категория', axis=1), drop_first=True)
 df = pd.get_dummies(df['категория'], drop_first=True)

@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
 from precision_counter import precision_func
 from recall_counter import recall_func
 from data_remaker import feature_engineering
@@ -28,7 +29,8 @@ model_mlp = MLPClassifier(activation='relu', alpha=0.0001, hidden_layer_sizes=(1
                           learning_rate='constant', solver='adam', max_iter=1000)
 model_rfc = RandomForestClassifier(n_estimators=128, max_features=3)
 model_ada = AdaBoostClassifier(n_estimators=59)
-alg_models = [model_mlp, model_rfc, model_ada]
+model_svc = SVC(C=1, degree=2, gamma='scale')
+alg_models = [model_mlp, model_rfc, model_ada, model_svc]
 
 recall_metric_test = []
 precision_metric_test = []
@@ -43,11 +45,13 @@ print("Recall for test")
 print(f"MLP: {recall_metric_test[0]}")
 print(f"RFC: {recall_metric_test[1]}")
 print(f"AdaBoost: {recall_metric_test[2]}")
+print(f"SVC: {recall_metric_test[3]}")
 print('\n')
 print("Precision for test")
 print(f"MLP: {precision_metric_test[0]}")
 print(f"RFC: {precision_metric_test[1]}")
 print(f"AdaBoost: {precision_metric_test[2]}")
+print(f"SVC: {precision_metric_test[3]}")
 print('\n')
 
 recall_metric_val = []
@@ -63,26 +67,32 @@ print("Recall for validation")
 print(f"MLP: {recall_metric_val[0]}")
 print(f"RFC: {recall_metric_val[1]}")
 print(f"AdaBoost: {recall_metric_val[2]}")
+print(f"SVC: {recall_metric_val[3]}")
 print('\n')
 print("Precision for validation")
 print(f"MLP: {precision_metric_val[0]}")
 print(f"RFC: {precision_metric_val[1]}")
 print(f"AdaBoost: {precision_metric_val[2]}")
+print(f"SVC: {precision_metric_val[3]}")
 
 alg_names = [model.__class__.__name__ for model in alg_models]
 
 fig, axs = plt.subplots(2, 2, figsize=(12, 8), dpi=200)
-axs[0, 0].plot(alg_names, recall_metric_val, '-gD', markevery=0.4, label='line with markers')
+axs[0, 0].plot(alg_names, recall_metric_val, '-gD', markevery=0.3, label='line with markers')
 axs[0, 0].set_title('Recall for validation')
 axs[0, 0].set_ylabel('Recall for validation')
-axs[0, 1].plot(alg_names, precision_metric_val, '-gD', markevery=0.4, label='line with markers')
+axs[0, 0].set_ylim([0.9, 1])
+axs[0, 1].plot(alg_names, precision_metric_val, '-gD', markevery=0.3, label='line with markers')
 axs[0, 1].set_title('Precision for validation')
 axs[0, 1].set_ylabel('Precision for validation')
-axs[1, 0].plot(alg_names, recall_metric_test, '-bD', markevery=0.4, label='line with markers')
+axs[0, 1].set_ylim([0.9, 1])
+axs[1, 0].plot(alg_names, recall_metric_test, '-bD', markevery=0.3, label='line with markers')
 axs[1, 0].set_title('Recall for test')
 axs[1, 0].set_ylabel("Recall for test")
-axs[1, 1].plot(alg_names, precision_metric_test, '-bD', markevery=0.4, label='line with markers')
+axs[1, 0].set_ylim([0.9, 1])
+axs[1, 1].plot(alg_names, precision_metric_test, '-bD', markevery=0.3, label='line with markers')
 axs[1, 1].set_title('Precision for test')
 axs[1, 1].set_ylabel('Precision for test')
+axs[1, 1].set_ylim([0.9, 1])
 
 plt.savefig('results.jpg')
